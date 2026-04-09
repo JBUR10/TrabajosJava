@@ -1,4 +1,5 @@
 package JueguitoSerpiente;
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -11,6 +12,9 @@ import java.awt.Font;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
+import javax.swing.ImageIcon;
+import java.awt.Image;
+
 public class Panel extends JPanel implements ActionListener {
 
     private static final int WIDTH = 600;
@@ -18,6 +22,8 @@ public class Panel extends JPanel implements ActionListener {
     private static final int CELL_SIZE = 50;
     private static final int COLS = WIDTH / CELL_SIZE;
     private static final int ROWS = HEIGHT / CELL_SIZE;
+
+    private Image foodImage;
 
     private Timer timer;
 
@@ -67,6 +73,8 @@ public class Panel extends JPanel implements ActionListener {
         setPreferredSize(new Dimension(WIDTH, HEIGHT));
         setBackground(Color.BLACK);
         setFocusable(true);
+
+        foodImage = new ImageIcon("img/food.png").getImage();
 
         spawnFood();
 
@@ -129,8 +137,7 @@ public class Panel extends JPanel implements ActionListener {
             g.fillRect(snakeX[i], snakeY[i], CELL_SIZE, CELL_SIZE);
         }
 
-        g.setColor(Color.RED);
-        g.fillOval(foodX + 3, foodY + 3, CELL_SIZE - 6, CELL_SIZE - 6);
+        g.drawImage(foodImage, foodX, foodY, CELL_SIZE, CELL_SIZE, null);
 
         g.setColor(Color.WHITE);
         g.setFont(new Font("Arial", Font.PLAIN, 18));
